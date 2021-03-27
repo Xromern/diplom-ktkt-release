@@ -1,0 +1,369 @@
+
+{% extends 'base-journal.html.twig' %}
+
+{% block title %}{{ group.name }}{% endblock %}
+
+{% block body %}
+<div class="change-group container-journal-center">
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="container-journal-block">
+        <div class="add-group-level-1">
+            <input type="text" value="{{group.name}}" class="edit-add-group-name" placeholder="ПП-0000" required="required"/>
+
+            <select class="select-teacher-curator">
+            </select><a href='/journal/teachers' class="button">Вчителя</a>
+            <select class="select-specialty">
+            </select><a href="{{ path('journal_group') }}" class="button button-add-specialty-show">Спеціальність</a>
+        </div>
+        <div class="add-group-level-2">
+            <div class="button button-update-group">Зберегти</div>
+            <div class="button button-delete-group">Видалити</div>
+        </div>
+    </div>
+    <a href='{{ path('journal_student_list',{'group_alis':group.alisen}) }}' class='block-group'>
+        <div class="block-group-caption">Студенти</div>
+    </a>
+    {% endif %}
+    <a href='{{ path('journal_show_form6',{'group_alis':group.getAlisEn}) }}' class='block-group'>
+        <div class="block-group-caption">Форма 6</div>
+
+    </a>
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="container-journal-block">
+        <div class="button button-show-subject-add">Створит новий журнал</div>
+        <div class="button button-sending-subject" style="margin-top: 10px">Розіслати журнали</div>
+    </div>
+    {% endif %}
+    <div class="preLoader" id="preloader-list-subject">  </div>
+    <div class="container-subjects">
+        {{ include('journal/journal_subject/subject-block.html.twig',{'tfc':tfc}) }}
+    </div>
+
+</div>
+
+<div id="myModal" class="modal modal-add-subject">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="modal-close">✘</span>
+        <div class="modal-container-journal-add-subject">
+
+            <select class="select-form-control">
+                {% for item in formControl %}
+                <option value="{{ item.id }}" data-id="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+
+            <select class="select-teacher">
+            </select>
+            <select class="select-grading-system">
+                {% for item in gradingSystem %}
+                    <option value="{{ item.id }}">{{ item.system }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <input type="text" class="input-add-subject" placeholder="Предмет" required="required"/>
+
+            <div class="button button-add-subject">Додати</div>
+        </div>
+        <div class="container-table-students-subject">
+            <div class="preLoader" id="preloader-subject">  </div>
+                <table class="student_ student_yes">
+                    {{ include('journal/journal_student/student-for-subject.html.twig',{'students':group.students}) }}
+                </table>
+                <table class="student_ student_no">
+                </table>
+
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    let preloaderAddSubject = new Preloader(
+
+        $('#preloader-subject'),
+
+        '{{ asset("images/preloader/preloader.gif") }}'
+    );
+
+    let preloaderListSubject = new Preloader(
+
+        $('#preloader-list-subject'),
+
+        '{{ asset("images/preloader/preloader.gif") }}'
+    );
+
+    curatorSelect();
+    function curatorSelect() {
+    $('.select-teacher-curator').html('');
+    $.ajax({
+        type: 'POST',
+        url: '{{ path('journal_curator_select') }}',
+        data: ({
+            "group_alis" :'{{group.id}}'
+        }),
+        error:function(){
+            note({
+                content: "Сталась помилка, перезавантажте сторінку.",
+                type: "error",
+                time: 15
+            });
+        },
+        success: function(result){
+            $('.select-teacher-curator').html(result);
+        }
+    });
+    }
+
+    specialtySelect();
+    function specialtySelect() {
+        $('.select-specialty').html('');
+        $.ajax({
+            type: 'POST',
+            url: '{{ path('journal_specialty_select') }}',
+            data: ({
+                "group_alis" :'{{group.id}}'
+            }),
+            error:function(){
+                note({
+                    content: "Сталась помилка, перезавантажте сторінку.",
+                    type: "error",
+                    time: 15
+                });
+            },
+            success: function(result){
+                $('.select-specialty').html(result);
+            }
+        });
+    }
+    $('html').on('click','.button-sending-subject', function(){
+        sendingSubject();
+    });
+
+    function sendingSubject() {
+        let student = "{{ arrayStudent}}";
+        let arrayStudent = JSON.parse(student);
+        for(let i = 0;i<arrayStudent.length;i++){
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('sendTableExcelToAllStudent') }}',
+                data: ({
+                    "student_id" :arrayStudent[i],
+
+                }),
+                error:function(){
+                    note({
+                        content: "Сталася помилка.",
+                        type: "error",
+                        time: 15
+                    });
+                },
+                success: function(result){
+                    note({
+                        content: result['message'],
+                        type: result['type'],
+                        time: 6
+                    });
+                }
+
+            });
+        }
+    }
+
+    $('html').on('click','.button-update-group', function(){
+        updateGroup();
+    });
+
+    function updateGroup() {
+
+        $.ajax({
+            type: 'POST',
+            url: '{{ path('groupUpdate') }}',
+            data: ({
+                "grading_system_id" : $('.select-grading-system').val(),
+                "curator_id" : $('.select-teacher-curator').val(),
+                "specialty_id" : $('.select-specialty').val(),
+                "group_id": '{{ group.id }}',
+                "group_name" :$('.edit-add-group-name').val()
+            }),
+            error:function(){
+                note({
+                    content: "Сталася помилка.",
+                    type: "error",
+                    time: 15
+                });
+            },
+            success: function(result){
+                note({
+                    content: result['message'],
+                    type: result['type'],
+                    time: 5
+                });
+                if(result['type'] === 'info'){
+                    history.replaceState("Group_name","Group_name",result['new_alis']);
+                    curatorSelect();
+                    specialtySelect();
+                }
+            }
+
+        });
+    }
+
+    $('html').on('click','.button-delete-group', function(){
+        if(confirm("Всі журнали, студенти цієї групи будуть видалені. Продовжии?"))
+            deleteGroup()
+    });
+
+    function deleteGroup(){
+        $.ajax({
+            type: 'POST',
+            url: '{{ path('groupDelete') }}',
+            data: ({
+                "group_id" :'{{ group.id }}'
+            }),
+            error:function(){
+                note({
+                    content: "Сталася помилка.",
+                    type: "error",
+                    time: 15
+                });
+            },
+            success: function(result){
+                    note({
+                        content: result['message'],
+                        type: result['type'],
+                        time: 15
+                    });
+                    setTimeout(function () {
+                        location.href="/journal";
+                    },2000)
+                }
+        })
+    }
+
+    $('html').on('click', '.student_yes tr', function (e) {
+        var student_id = $(this).attr('data-id-student');
+     //   deleteStudentFromSubject(student_id);
+
+        $(this).prependTo($('.student_no'));
+        calculation_height();
+       // showSubjectJournal()
+    });
+
+
+    $('html').on('click', '.student_no tr', function (e) {
+        var student_id = $(this).attr('data-id-student');
+       // addStudentToSubject(student_id);
+
+        $(this).prependTo($('.student_yes'));
+        calculation_height();
+      //  showSubjectJournal()
+    });
+
+
+
+    function create_list_student(){
+        var length =  $('.student_yes tr').length;
+        var array = [];
+        for(var i = 1;i<=length;i++){
+            array.push($('.student_yes tr:nth-child('+[i]+')').attr('data-id-student'));
+        }
+        return JSON.stringify(array);
+    }
+
+
+    function calculation_height(){
+        var length = $('.student_no tr').length;
+        var min_height = length*35.3;
+        $('.student_select').css('min-height',min_height+'px');
+    }
+
+    $('html').on('click','.button-add-subject', function(){
+        // console.log(create_list_student());
+        addSubject()
+    });
+
+    function addSubject(){
+
+        $.ajax({
+            url:'{{ path('subjectAdd') }}',
+            type:"POST",
+            data:({
+                "grading_system_id" : $('.select-grading-system').val(),
+                'name_subject':$('.input-add-subject').val(),
+                'list_student':create_list_student(),
+                'group_id':'{{ group.id }}',
+                'teacher_id':$('.select-teacher').val(),
+                'form_control_id':$('.select-form-control').val()
+            }),
+            beforeSend: function() {
+                preloaderAddSubject.showPeloader();
+                $('.student_ ').hide();
+            },
+            complete: function() {
+                preloaderAddSubject.hidePrloaer();
+                $('.student_ ').show();
+            },
+            error: function() {
+                note({
+                    content: "Сталася помилка.",
+                    type: "error",
+                    time: 15
+                });
+            },success:function(data){
+                console.log(data);
+                note({
+                    content: data['message'],
+                    type: data['type'],
+                    time: 5
+                });
+                $('.input-add-subject').val("");
+            }
+        });
+    }
+
+
+    teacherSelect();
+    function teacherSelect() {
+        $('.select-curator').html(' ');
+        $.ajax({
+            type: 'POST',
+            url: '{{ path('teacherSelect') }}',
+            error:function(){
+                note({
+                    content: "Сталась помилка, перезавантажте сторінку.",
+                    type: "error",
+                    time: 15
+                });
+            },
+            success: function(result){
+                $('.select-teacher').html(result['teachers']);
+            }
+        });
+    }
+
+    var modal = document.getElementById('myModal');
+
+    var span = document.getElementsByClassName("modal-close")[0];
+
+    //если кликаю на крестик, добавлюя id коммента в модальное окно для редактирование комменатрия
+    //
+    $('html').on('click','.button-show-subject-add', function(){
+
+        teacherSelect();
+        modal.style.display = "block";
+    });
+
+    span.onclick = function() {
+
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+
+            modal.style.display = "none";
+        }
+    }
+</script>
+{% endblock %}
