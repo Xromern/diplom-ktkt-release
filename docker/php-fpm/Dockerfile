@@ -22,6 +22,8 @@ RUN chmod +x /usr/bin/wait-for-it
 #RUN apk --update --no-cache add git
 
 RUN docker-php-ext-install pdo_mysql
+RUN cd /usr/local/etc/php/conf.d/ && \
+  echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini
 
 COPY --from=composer:1.4 /usr/bin/composer /usr/bin/composer
 

@@ -3,28 +3,36 @@
 
 namespace App\Twig;
 
+use App\Service\Helper;
+use Doctrine\Common\Persistence\ObjectManager;
+use Twig\TwigFunction;
+
 class Functions extends \Twig_Extension{
+
+    private $menager;
+
+    public function __construct(
+        ObjectManager $manager
+    ){
+        $this->menager = $manager;
+    }
 
     public function getFunctions()
     {
-        $function = function($tree) {
-            $result = $this->build_tree($tree);
-            return $result;
-        };
+
         return array(
-            new \Twig_SimpleFunction('tree', $function),
+            new TwigFunction('inner_menu', [$this, 'inner_menu']),
         );
     }
 
     /**
      * Строит дерево категорий
      * @param array $cats
-     * @return string
+     * @return array
      */
-    public function build_tree( $cats){
-        $tree = '<ul>3453245';
-        $tree .= '</ul>';
-        return $tree;
+    public function inner_menu(){
+
+        return Helper::createMenu($this->menager);
     }
 
 

@@ -80,8 +80,7 @@
     }
 
     .side-bar {
-        max-width: 100%;
-        width: 100%;
+       display: none;
     }
 
     .side-bar-container {

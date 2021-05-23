@@ -5,6 +5,15 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "components/elfinder": {
+        "version": "2.2"
+    },
+    "components/jquery": {
+        "version": "3.5.1"
+    },
+    "components/jqueryui": {
+        "version": "1.12.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -31,6 +40,9 @@
     },
     "doctrine/dbal": {
         "version": "v2.9.2"
+    },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
     },
     "doctrine/doctrine-bundle": {
         "version": "1.6",
@@ -127,6 +139,9 @@
     "egulias/email-validator": {
         "version": "2.1.7"
     },
+    "ezyang/htmlpurifier": {
+        "version": "v4.13.0"
+    },
     "facebook/webdriver": {
         "version": "1.6.0"
     },
@@ -148,6 +163,28 @@
     "friendsofsymfony/user-bundle": {
         "version": "2.2.x-dev"
     },
+    "guzzlehttp/psr7": {
+        "version": "1.8.2"
+    },
+    "helios-ag/fm-elfinder-bundle": {
+        "version": "7.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "7.0",
+            "ref": "fb9152ee3538f968d9e0f2c763ecbe4ab63eff26"
+        },
+        "files": [
+            "config/packages/fm_elfinder.yaml",
+            "config/routes/fm_elfinder.yaml"
+        ]
+    },
+    "helios-ag/fm-elfinder-php-connector": {
+        "version": "2.5.9"
+    },
+    "intervention/image": {
+        "version": "2.5.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -160,6 +197,12 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v3.0.0"
     },
+    "kriswallsmith/assetic": {
+        "version": "v1.0.5"
+    },
+    "maennchen/zipstream-php": {
+        "version": "2.1.0"
+    },
     "markbaker/complex": {
         "version": "1.4.7"
     },
@@ -168,6 +211,9 @@
     },
     "monolog/monolog": {
         "version": "1.24.0"
+    },
+    "myclabs/php-enum": {
+        "version": "1.7.7"
     },
     "nikic/php-parser": {
         "version": "v4.2.1"
@@ -199,6 +245,15 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
@@ -207,6 +262,12 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
+    },
+    "robloach/component-installer": {
+        "version": "0.2.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -286,6 +347,9 @@
     },
     "symfony/dependency-injection": {
         "version": "v4.2.7"
+    },
+    "symfony/deprecation-contracts": {
+        "version": "v2.4.0"
     },
     "symfony/doctrine-bridge": {
         "version": "v4.2.7"
@@ -410,6 +474,9 @@
     },
     "symfony/polyfill-intl-idn": {
         "version": "v1.11.0"
+    },
+    "symfony/polyfill-intl-normalizer": {
+        "version": "v1.22.1"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.11.0"

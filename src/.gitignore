@@ -3,7 +3,9 @@
 /.env.local
 /.env.local.php
 /.env.*.local
-/public/bundles/
+/src/public/bundles/
+/src/public/excel/
+
 /var/
 /vendor/
 ../.idea

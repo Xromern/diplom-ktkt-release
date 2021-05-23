@@ -11,6 +11,8 @@
 
         {% block head_stylesheets %}
             <link rel="stylesheet" href="{{ asset('bundles/easyadmin/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
         {% endblock %}
 
         {% for css_asset in easyadmin_config('design.assets.css') %}

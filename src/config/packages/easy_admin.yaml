@@ -1,5 +1,8 @@
 easy_admin:
+    site_name: KTKT ЧНТУ
     design:
+      templates:
+        layout: 'admin/layout.html.twig' # templates/layout.html.twig
       menu:
         - label: 'Статті'
           icon: 'newspaper-o'
@@ -24,7 +27,7 @@ easy_admin:
               - { property: 'title' }
               - { property: 'image', type: 'image', base_path: '%app.path.article_images%' }
               - { property: 'description' }
-              - { property: 'text' }
+#              - { property: 'text' }
               - { property: 'categories' }
             show:
               fields:
@@ -76,6 +79,18 @@ easy_admin:
             class: App\Entity\CategoryArticle
         Advertisement:
           class: App\Entity\Advertisement
+          list:
+            fields:
+              - { property: 'title' }
+              - { property: 'description' }
+          show:
+            fields:
+              - { property: 'title' }
+              - { property: 'description' }
+          form:
+            fields:
+              - { property: 'title', type: 'fos_ckeditor'}
+              - { property: 'description',type: 'text'  }
         Comment:
           class: App\Entity\Comment
         user:

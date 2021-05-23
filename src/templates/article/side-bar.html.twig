@@ -4,7 +4,7 @@
         {% for item in advertisement %}
             <div class="side-bar-container">
                 <div class="side-bar-container-caption">
-                    {{ item.title }}
+                    {{ item.title|raw }}
                 </div>
                 <hr>
                 <div class="side-bar-container-text">

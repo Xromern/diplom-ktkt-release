@@ -39,3 +39,5 @@ security:
         - { path: ^/admin/, roles: ROLE_ADMIN }
         - { path: ^/journal, roles:  [ROLE_ADMIN, ROLE_STUDENT, ROLE_TEACHER ] }
         - { path: ^/journal, roles:  [ROLE_ADMIN, ROLE_STUDENT, ROLE_TEACHER ] }
+        - { path: ^/efconnect, role: ROLE_ADMIN }
+        - { path: ^/elfinder, role: ROLE_ADMIN }

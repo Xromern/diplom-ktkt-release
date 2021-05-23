@@ -24,9 +24,10 @@ services:
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
       - DATABASE_URL=mysql://${DATABASE_USER}:${DATABASE_PASSWORD}@database:3306/${DATABASE_NAME}?serverVersion=5.7
+      - COMPOSER_MEMORY_LIMIT=-1
     volumes:
       - ../src:/var/www
-
+      - ./php.ini:/usr/local/etc/php/custom.d
   nginx:
     build:
       context: ./nginx
