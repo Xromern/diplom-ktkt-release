@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Button;
 use App\Entity\JournalGroup;
 use App\Entity\Menu;
 use App\Entity\Page;
@@ -25,7 +26,9 @@ class ArticleController extends AbstractController
      */
     public function showArticles(\Symfony\Component\HttpFoundation\Request $request,PaginatorInterface $paginator,UserInterface $user = null)
     {
+
         $em = $this->getDoctrine()->getManager();
+
         Service\Helper::generateName();
         $paginationArticle = Service\ArticleManager::getPaginateArticles(
             $em,

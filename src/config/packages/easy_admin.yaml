@@ -15,8 +15,10 @@ easy_admin:
         - label: 'Сторінки коледжу'
           icon: 'newspaper-o'
           children:
-            - { entity: 'Menu', label: 'Меню' }
+            - { entity: 'Menu', label: 'Внутрішнє меню' }
             - { entity: 'Page', label: 'Сторінки' }
+            - { entity: 'Button', label: 'Блоки меню' }
+            - { entity: 'MainMenu', label: 'Головне меню' }
 
 
     entities:
@@ -59,6 +61,10 @@ easy_admin:
               - { property: 'url' }
               - { property: 'page' }
               - { property: 'parent'}
+        Button:
+          class: App\Entity\Button
+        MainMenu:
+          class: App\Entity\MainMenu
         Page:
           class: App\Entity\Page
           list:
@@ -114,6 +120,7 @@ easy_admin:
           class: App\Entity\JournalStudent
         JournalSubject:
           class: App\Entity\JournalSubject
+
 
 
 

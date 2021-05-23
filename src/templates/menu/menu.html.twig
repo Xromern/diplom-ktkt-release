@@ -1,10 +1,20 @@
 <nav>
     <ul>
-        <li class="navigation-menu-li-1"><a href="/" >Головна</a></li>
-        <li class="navigation-menu-li-2"><a href="/journal">Журнал</a></li>
-        <li class="navigation-menu-li-3"><a href="#">Вступникам</a></li>
-        <li class="navigation-menu-li-4"><a href="#">Викладачам</a></li>
-        <li class="navigation-menu-li-5"><a href="#">Контакти</a></li>
+        {% for item in main_menu() %}
+
+            <li class="navigation-menu-li-1"><a href="
+{% if item.url!="" %}
+        {{ item.url }}
+{% elseif item.page %}
+
+        {{ path('showPage',{'alis':item.page.alisen}) }}
+
+   {% endif %}
+
+">{{ item.title }}</a></li>
+
+        {% endfor %}
+
         <div class="button-open-menu">
             <div class="btn-open"></div>
         </div>
@@ -29,13 +39,13 @@
 {% endif %}
 ">{{ item.parent.title }}</a>
                     {% if item.child %}
-                    <ul>
-                        {% for child in item.child %}
-                            <li><a href="
+                        <ul>
+                            {% for child in item.child %}
+                                <li><a href="
                 {% if child.url!="" %}
                 {{ path('showPage',{'alis':child.url}) }}
                 {% elseif child.page %}
-                    {% if  child.page.alisen != ""%}
+                    {% if  child.page.alisen != "" %}
                     {{ path('showPage',{'alis':child.page.alisen}) }}
                     {% else %}
                     #
@@ -44,8 +54,8 @@
                 #
                 {% endif %}
 ">{{ child.title }}</a></li>
-                        {% endfor %}
-                    </ul>
+                            {% endfor %}
+                        </ul>
                     {% endif %}
                 </li>
             {% endfor %}
@@ -72,7 +82,7 @@
 </div>
 <script>
 
-    $(".button-open-menu div").click(function(){
+    $(".button-open-menu div").click(function () {
         $(".overlay").fadeToggle(200);
         $(this).toggleClass('btn-open').toggleClass('btn-close');
 
@@ -80,18 +90,18 @@
 
     });
 
-    let overflowBody = () =>{
-        if($('body').hasClass('overflow-hidden-body')){
+    let overflowBody = () => {
+        if ($('body').hasClass('overflow-hidden-body')) {
 
             $('body').removeClass('overflow-hidden-body')
 
-        }else{
+        } else {
             $('body').addClass('overflow-hidden-body')
         }
 
     }
 
-    $('.overlay').on('click', function(){
+    $('.overlay').on('click', function () {
         $(".overlay").fadeToggle(200);
         $(".button div").toggleClass('btn-open').toggleClass('btn-close');
 
