@@ -4,7 +4,7 @@ easy_admin:
       templates:
         layout: 'admin/layout.html.twig' # templates/layout.html.twig
       menu:
-        - label: 'Статті'
+        - label: 'Контент'
           icon: 'newspaper-o'
           children:
             - { entity: 'Article', label: 'Статті' }
@@ -12,11 +12,11 @@ easy_admin:
             - { entity: 'Advertisement', label: 'Оголошення' }
             - { entity: 'Comment', label: 'Коментарі' }
             - { entity: 'user', label: 'Пользователи' }
-        - label: 'Сторінки коледжу'
+            - { entity: 'Page', label: 'Сторінки' }
+        - label: 'Меню'
           icon: 'newspaper-o'
           children:
             - { entity: 'Menu', label: 'Внутрішнє меню' }
-            - { entity: 'Page', label: 'Сторінки' }
             - { entity: 'Button', label: 'Блоки меню' }
             - { entity: 'MainMenu', label: 'Головне меню' }
 
