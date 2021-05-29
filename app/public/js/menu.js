@@ -1,14 +1,35 @@
 $(document).ready(function(){
-    $(".button-open-menu a").click(function(){
+
+    function toogle(){
         $(".overlay").fadeToggle(200);
-        $(this).toggleClass('btn-open').toggleClass('btn-close');
+        $(".button-open-menu div").toggleClass('btn-open').toggleClass('btn-close');
+
+        overflowBody();
+    }
+
+    $(".button-open-menu div").click(function () {
+        toogle();
     });
+
+    $('.overlay').on('click', function () {
+        toogle();
+    });
+
+    let overflowBody = () => {
+        if ($('body').hasClass('overflow-hidden-body')) {
+
+            $('body').removeClass('overflow-hidden-body')
+
+        } else {
+            $('body').addClass('overflow-hidden-body')
+        }
+
+    }
+
 });
-$('.overlay').on('click', function(){
-    $(".overlay").fadeToggle(200);
-    $(".button a").toggleClass('btn-open').toggleClass('btn-close');
-    open = false;
-});
+
+
+
 remove();
 function remove() {
     if($(this).scrollTop()>70){

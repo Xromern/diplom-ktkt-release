@@ -85,7 +85,8 @@ class Form6Controller extends AbstractController
         Helper::isEmpty($group);
         $dateArray = explode('-',$request->get('date'));
 
-        $cal_days_in_month = cal_days_in_month(CAL_GREGORIAN, $dateArray[1], $dateArray[0]);
+        $cal_days_in_month = date('t', mktime(0, 0, 0, $dateArray[1], 1, $dateArray[0]));
+//         \cal_days_in_month(CAL_GREGORIAN, $dateArray[1], $dateArray[0]);
 
         if($this->isGranted('ROLE_STUDENT')){
             $students = Journal::getForm6([Journal::Student($this->getUser())],$cal_days_in_month,$manager,$request->get('date'));

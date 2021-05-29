@@ -5,10 +5,6 @@
             <div>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <div class="container-head-info-user">
-                        {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}<br>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <b style="color:red">Admin</b>
-                        {% endif %}
                         {% if app.user.code %}
                         {%if  app.user.getCode.getStudent  %}
                             {{ app.user.getCode.getStudent.getName }}<br>
@@ -26,15 +22,28 @@
                     </div>
 
 
-                    <div>
-                        <a href="/profile" class="button">Профіль</a>
+                    <div class="container-head-info-user">
+                        <a href="/profile" class="button">Профіль
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <b>(Адмін)</b>
+                            {% elseif is_granted('ROLE_TEACHER') %}
+                            <b>(Вчитель)</b>
+                            {% elseif is_granted('ROLE_STUDENT') %}
+                            <b>(Студент)</b>
+                            {% endif %}
+
+                        </a>
                         <a  class="button" href="{{ path('fos_user_security_logout') }}">
-                            {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                            Вихід
                         </a>
                     </div>
                 {% else %}
-                    <a href="/register" class="button">Реєстрація</a>
+                <div class="container-head-info-user">
+
+                <a href="/register" class="button">Реєстрація</a>
                     <a href="/login" class="button">Авторизація</a>
+                </div>
                 {% endif %}
 
             </div>

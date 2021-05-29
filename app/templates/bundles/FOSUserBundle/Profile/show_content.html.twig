@@ -4,8 +4,9 @@
         <div class="wrap-login100 p-t-85 p-b-20 white-block">
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+            {% if is_granted('ROLE_ADMIN') %}
 
-    {% if app.user.code == null%}
+    {% elseif app.user.code == null%}
     <div class="wrap-input100 m-t-85 m-b-35 white-block" data-validate = "Enter kode">
         <input type="text" class="input100 keyP" />
         <span class="focus-input100" data-placeholder="Код"></span>

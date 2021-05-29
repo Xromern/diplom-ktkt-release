@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\JournalCode;
 use App\Entity\JournalTeacher;
 use App\Entity\JournalTypeMark;
+use App\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,12 +32,15 @@ class UserController extends AbstractController
            return new JsonResponse(array('type' => 'error','message'=>'Код вже використано'));
 
        }
-
        $this->getUser()->setRoles(array($key->getRole()));
         $key->setUser($this->getUser());
+        $key->setDateUse(new \DateTime("now"));
+
+
        $manager->persist($this->getUser());
        $manager->persist($key);
        $manager->flush();
+
 
         return new JsonResponse(array('type' => 'info','message'=>'Ви активували акаунт'));
     }
