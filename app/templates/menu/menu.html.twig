@@ -1,0 +1,111 @@
+<nav>
+    <ul>
+        {% for item in main_menu() %}
+
+            <li class="navigation-menu-li-1"><a href="
+{% if item.url!="" %}
+        {{ item.url }}
+{% elseif item.page %}
+
+        {{ path('showPage',{'alis':item.page.alisen}) }}
+
+   {% endif %}
+
+">{{ item.title }}</a></li>
+
+        {% endfor %}
+
+        <div class="button-open-menu">
+            <div class="btn-open"></div>
+        </div>
+    </ul>
+
+</nav>
+<div class="overlay">
+    <div class="wrap">
+        <ul class="wrap-nav">
+            {% for item in inner_menu() %}
+                <li><a href="
+{% if item.parent.url!="" %}
+    {{ path('showPage',{'alis':item.parent.url}) }}
+{% elseif item.parent.page %}
+    {% if item.parent.page.alisen!="" %}
+   {{ path('showPage',{'alis':item.parent.page.alisen}) }}
+   {% else %}
+   #
+   {% endif %}
+{% else %}
+#
+{% endif %}
+">{{ item.parent.title }}</a>
+                    {% if item.child %}
+                        <ul>
+                            {% for child in item.child %}
+                                <li><a href="
+                {% if child.url!="" %}
+                {{ path('showPage',{'alis':child.url}) }}
+                {% elseif child.page %}
+                    {% if  child.page.alisen != "" %}
+                    {{ path('showPage',{'alis':child.page.alisen}) }}
+                    {% else %}
+                    #
+                    {% endif %}
+                {% else %}
+                #
+                {% endif %}
+">{{ child.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="social">
+            <a href="https://www.facebook.com/ktkt.cntu">
+                <div class="social-icon">
+                    <i class="fa fa-facebook"></i>
+                </div>
+            </a>
+            <a href="https://www.facebook.com/ktkt.cntu">
+                <div class="social-icon">
+                    <i class="fa fa-facebook"></i>
+                </div>
+            </a>
+            <a href="https://www.facebook.com/ktkt.cntu">
+                <div class="social-icon">
+                    <i class="fa fa-facebook"></i>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    $(".button-open-menu div").click(function () {
+        $(".overlay").fadeToggle(200);
+        $(this).toggleClass('btn-open').toggleClass('btn-close');
+
+        overflowBody();
+
+    });
+
+    let overflowBody = () => {
+        if ($('body').hasClass('overflow-hidden-body')) {
+
+            $('body').removeClass('overflow-hidden-body')
+
+        } else {
+            $('body').addClass('overflow-hidden-body')
+        }
+
+    }
+
+    $('.overlay').on('click', function () {
+        $(".overlay").fadeToggle(200);
+        $(".button div").toggleClass('btn-open').toggleClass('btn-close');
+
+        overflowBody();
+        open = false;
+    });
+</script>
