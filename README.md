@@ -10,3 +10,4 @@ sudo docker exec -i docker_database_1  mysqldump -u ktkt -pq  ktkt -h 127.0.0.1 
 docker exec -i docker_database_1 mysql -uktkt -pq ktkt < data.sql
 docker exec -i docker_database_1 mysql -uktkt -pq ktkt > data2.sql
 
+1. Create .env (.env.example) in /docker
