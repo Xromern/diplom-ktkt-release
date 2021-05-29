@@ -5,7 +5,7 @@
 /.env.*.local
 /src/public/bundles/
 /src/public/excel/
-
+/node_modules
 /var/
 /vendor/
 ../.idea
