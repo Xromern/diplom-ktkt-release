@@ -27,7 +27,7 @@ services:
       - COMPOSER_MEMORY_LIMIT=-1
     volumes:
       - ../app:/var/www
-      - ./php.ini:/usr/local/etc/php/custom.d
+#      - ./php.ini:/usr/local/etc/php/custom.d
   nginx:
     build:
       context: ./nginx

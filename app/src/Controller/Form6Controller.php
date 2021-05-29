@@ -189,7 +189,7 @@ class Form6Controller extends AbstractController
 
         $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($subjectExcel->spreadsheet);
 
-        $writer->save("excel/subject/$name.xlsx");
+//        $writer->save("excel/subject/$name.xlsx");
 
         return ExcelJournal::send($student[0],$name,$mailer);
  }

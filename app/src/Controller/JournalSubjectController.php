@@ -542,7 +542,7 @@ class JournalSubjectController extends AbstractController
             $subjectExcel->sendSubjectJournal($subject->getId(),$student);
             $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($subjectExcel->spreadsheet);
 
-            $writer->save("excel/subject/$name.xlsx");
+//            $writer->save("excel/subject/$name.xlsx");
 
             Service\ExcelJournal::send($student,$name,$mailer);
 
@@ -568,8 +568,7 @@ class JournalSubjectController extends AbstractController
             $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($subjectExcel->spreadsheet);
 
             $name = $group->getAlisEn().'+'.Service\Helper::createAlias($student->getName()).'+'.date("Y-m-d H-i-s");
-            $writer->save("excel/subject/$name.xlsx");
-            $writer->save("excel/subject/$name.xlsx");
+//            $writer->save("excel/subject/$name.xlsx");
 
            Service\ExcelJournal::send($student,$name,$mailer);
 

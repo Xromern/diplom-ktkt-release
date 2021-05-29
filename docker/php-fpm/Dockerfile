@@ -14,12 +14,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& docker-php-ext-install -j$(nproc) imap \
 	&& docker-php-ext-install -j$(nproc) gd \
 	&& docker-php-ext-install pdo_mysql mysqli zip
+#	&& node
 
 COPY wait-for-it.sh /usr/bin/wait-for-it
 
 RUN chmod +x /usr/bin/wait-for-it
-
-#RUN apk --update --no-cache add git
+RUN apt-get install -y gnupg2
+# Removing /var/lib/apt/lists worked
+RUN rm -rf /var/lib/apt/lists/ && curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install nodejs -y
 
 RUN docker-php-ext-install pdo_mysql
 RUN cd /usr/local/etc/php/conf.d/ && \
@@ -28,7 +31,8 @@ RUN cd /usr/local/etc/php/conf.d/ && \
 COPY --from=composer:1.4 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
-CMD composer install ;wait-for-it database:3306 -- bin/console doctrine:migrations:migrate ; php-fpm
+
+CMD composer install ;wait-for-it database:3306 -- bin/console doctrine:migrations:migrate; npm install;  php-fpm
 #CMD bin/console ckeditor:install
 
 EXPOSE 9000

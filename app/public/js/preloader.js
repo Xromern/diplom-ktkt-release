@@ -1,6 +1,4 @@
-'use strict';
-
-class Preloader {
+export class Preloader {
 
     constructor(block,src) {
         this.src = src;

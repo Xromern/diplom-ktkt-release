@@ -6,7 +6,7 @@
     transition: height 0.45s ease-in-out;
     -webkit-transition: height 0.45s ease-in-out;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 99999999;
 }
 #notes .note-item {
     max-height: 12em;
