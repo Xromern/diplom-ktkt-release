@@ -5,6 +5,8 @@
 /.env.*.local
 /src/public/bundles/
 /src/public/excel/
+/src/public/images/article
+
 /node_modules
 /var/
 /vendor/
