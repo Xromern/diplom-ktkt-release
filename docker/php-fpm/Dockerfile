@@ -17,6 +17,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #	&& node
 
 COPY wait-for-it.sh /usr/bin/wait-for-it
+RUN pecl install -o -f redis \
+&&  rm -rf /tmp/pear \
+&&  docker-php-ext-enable redis
+
 
 RUN chmod +x /usr/bin/wait-for-it
 RUN apt-get install -y gnupg2
