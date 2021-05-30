@@ -37,3 +37,13 @@ services:
         class: App\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
+    Redis:
+        class: Redis
+        calls:
+            - method: connect
+              arguments:
+                  - '%env(REDIS_HOST)%'
+                  - '%env(int:REDIS_PORT)%'
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler:
+        arguments:
+            - '@Redis'
