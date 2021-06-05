@@ -1,3 +1,5 @@
 
 /database/data/*
+/redis/data/*
+/logs/*
 .env
