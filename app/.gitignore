@@ -3,13 +3,13 @@
 /.env.local
 /.env.local.php
 /.env.*.local
-/src/public/bundles/
-/src/public/excel/
-/src/public/editor
-/src/public/uploads
-/src/components
+/public/bundles/
+/public/excel/
+/public/editor
+/public/uploads
+/components
 
-/src/public/images/article
+/public/images/article
 
 /node_modules
 /var/
