@@ -5,6 +5,7 @@
 /.env.*.local
 /public/bundles/
 /public/excel/
+/public/assets
 /public/editor
 /public/uploads
 /components
