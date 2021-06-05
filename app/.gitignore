@@ -5,6 +5,10 @@
 /.env.*.local
 /src/public/bundles/
 /src/public/excel/
+/src/public/editor
+/src/public/uploads
+/src/components
+
 /src/public/images/article
 
 /node_modules
