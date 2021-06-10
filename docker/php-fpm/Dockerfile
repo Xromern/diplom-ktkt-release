@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		libpng-dev \
 		libmemcached-dev zlib1g-dev \
 		libmagickwand-dev \
-    		libmagickcore-dev \
+        libmagickcore-dev \
 		libc-client-dev \
 		libkrb5-dev \
 	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
@@ -14,17 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& docker-php-ext-install -j$(nproc) imap \
 	&& docker-php-ext-install -j$(nproc) gd \
 	&& docker-php-ext-install pdo_mysql mysqli zip
-#	&& node
 
-COPY wait-for-it.sh /usr/bin/wait-for-it
 RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
 &&  docker-php-ext-enable redis
 
-
-RUN chmod +x /usr/bin/wait-for-it
 RUN apt-get install -y gnupg2
-# Removing /var/lib/apt/lists worked
 RUN rm -rf /var/lib/apt/lists/ && curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install nodejs -y
 
@@ -33,10 +28,6 @@ RUN cd /usr/local/etc/php/conf.d/ && \
   echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini
 
 COPY --from=composer:1.4 /usr/bin/composer /usr/bin/composer
-
 WORKDIR /var/www
-
-CMD composer install ;wait-for-it database:3306 -- bin/console doctrine:migrations:migrate; npm install;  php-fpm
-#CMD bin/console ckeditor:install
-
+CMD composer install ; bin/console doctrine:migrations:migrate; npm install;  php-fpm
 EXPOSE 9000
