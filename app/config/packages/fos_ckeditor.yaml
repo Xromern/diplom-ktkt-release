@@ -9,6 +9,7 @@ fos_ck_editor:
     default_config: default
     configs:
         default:
+            language: en
             bodyClass: 'guide'
             filebrowserBrowseRoute: elfinder
             format_tags: 'p;h2;h3;div'

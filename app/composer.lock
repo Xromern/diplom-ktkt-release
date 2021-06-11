@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e507eb97c9bd7c17bdadcc25d06ae98b",
+    "content-hash": "423fd01267e2fefc5462d337350617d5",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -4868,6 +4868,7 @@
                 "symfony",
                 "words"
             ],
+            "abandoned": "use `EnglishInflector` from the String component instead",
             "time": "2019-01-16T20:31:39+00:00"
         },
         {
