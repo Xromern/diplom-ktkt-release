@@ -50,7 +50,7 @@ class Article
      * @ORM\Column(type="string", length=255)
      * @var string
      */
-    private $image;
+    private $image = '';
 
     /**
      * @Vich\UploadableField(mapping="article", fileNameProperty="image")
