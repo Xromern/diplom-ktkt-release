@@ -9,7 +9,7 @@ docker exec -it docker_php-fpm_1 bash
 
 sudo docker exec -i docker_database_1  mysqldump -u root -pq  ktkt -h 127.0.0.1 -P3306  > /home/danil/ktkt-dump22.sql
 sudo docker exec -i docker_database_1  mysqldump -u root -pq  ktkt -h 127.0.0.1 -P3306  < /home/danil/ktkt-dump2.sql
-sudo docker exec -i docker_database_1  mysqldump -u root -pq  ktkt -h 127.0.0.1 -P3306  > ktkt-dump4.sql
+sudo docker exec -i docker_database_1  mysqldump -u root -pq  ktkt -h 127.0.0.1 -P3306  > ktkt-dump5.sql
 sudo docker exec -i docker_database_1  mysqldump -u root -pq  ktkt -h 127.0.0.1 -P3306  < ktkt-dump3.sql
 
 

@@ -20,17 +20,17 @@ import './slider.js';
 import './useful.js';
 import {note} from './notification.js';
 window.note = note;
-import '../css/admin.css';
-import '../css/big-buttons.css';
-import '../css/login.css';
-import '../css/main.css';
-import '../css/main-journal.css';
-import '../css/media-query.css';
-import '../css/menu.css';
-import '../css/notification.css';
-import '../css/pagination.css';
-import '../css/slider.css';
-import '../css/util.css';
+import '../css/admin.scss';
+import '../css/big-buttons.scss';
+import '../css/login.scss';
+import '../css/main.scss';
+import '../css/main-journal.scss';
+import '../css/media-query.scss';
+import '../css/menu.scss';
+import '../css/notification.scss';
+import '../css/pagination.scss';
+import '../css/slider.scss';
+import '../css/util.scss';
 $( document ).ready(function() {
 
     setDefaultImage()
