@@ -71,3 +71,38 @@ export function paginateArticle(currentPage, preloader) {
 
     }
 }
+
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+
+}
+
+export function showAjaxComment(article_id,path,preloader){
+    $.ajax({
+        type: "POST",
+        url: path,//showComments
+        data: ({
+            'id': article_id,
+            "page": getUrlVars()['page'],
+        }),
+        beforeSend: function() {
+            $('#comments-block').html('');
+            preloader.showPeloader();
+
+        },
+        success: function (html) {
+            preloader.hidePrloaer();
+            $('#comments-block').html(html);
+        }
+    });
+}
+

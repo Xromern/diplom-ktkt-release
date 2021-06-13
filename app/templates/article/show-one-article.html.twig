@@ -38,9 +38,11 @@
 
 </div>
 <script>
+    let editor_comment = 'comment_text';
+    let editor_edit_comment = 'editor-edit-comment';
+
     $( document ).ready(function() {
-        let editor_comment = 'comment_text';
-        let editor_edit_comment = 'editor-edit-comment';
+
 
         history.replaceState(//занести в историю номер страницы с коментариеями
             {'type': 'paginate_comment', 'article_page_comment': 1},
@@ -53,6 +55,8 @@
         );
 
         $("#comment_text").removeAttr("required");
+
+
         $(document).ready(function () {
             tinymce.init({
                 selector: '#' + editor_comment,
@@ -102,8 +106,8 @@
 
                 e.preventDefault();
 
-                addComment(tinymce.get(editor_comment).getContent());
-
+                addComment(tinyMCE.get("comment_text").getContent({ format: "text" }));
+                tinyMCE.get("comment_text").setContent('')
             });
 
             let addComment = (text) => {
@@ -129,8 +133,10 @@
                             time: 10
                         });
 
-                        if(result['type']==='info')
-                        showAjaxComment({{ article.id }}, '{{ path('showComments') }}',preloaderCommentPagination);
+                        if(result['type']==='info') {
+                            showAjaxComment({{ article.id }}, '{{ path('showComments') }}',preloaderCommentPagination);
+
+                        }
 
                     }
                 });
@@ -282,4 +288,6 @@
         });
     });
 </script>
+    <script type="text/javascript" src="{{ asset('editor/tinymce.min.js') }}"></script>
+
 {% endblock %}

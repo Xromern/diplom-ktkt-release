@@ -9,15 +9,14 @@ import {setDefaultImage} from "./coffe";
 
 window.Preloader = Preloader;
 window.setDefaultImage = setDefaultImage;
-import {paginateArticle} from "./paginate.js";
+import {paginateArticle, showAjaxComment} from "./paginate.js";
 window.paginateArticle = paginateArticle;
+window.showAjaxComment = showAjaxComment;
 
 
 
-import './ajax_move.js';
 import './menu.js';
 import './slider.js';
-import './useful.js';
 import {note} from './notification.js';
 window.note = note;
 import '../css/admin.scss';
